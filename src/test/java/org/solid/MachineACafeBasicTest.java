@@ -1,10 +1,7 @@
 package org.solid;
 
 import org.junit.jupiter.api.*;
-import org.solid.domain.machine.Cafe;
-import org.solid.domain.machine.MachineACafe;
-import org.solid.domain.machine.MachineACafeBasic;
-import org.solid.domain.machine.MachineACafeStockException;
+import org.solid.domain.machine.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -86,16 +83,16 @@ class MachineACafeBasicTest {
         // GIVEN
 
         // WHEN
-        MachineACafeStockException machineACafeException = Assertions.assertThrows(MachineACafeStockException.class, () -> machineACafe.commanderUnCafe(10, false));
+        MachineACafePreparationException machineACafePreparationException = Assertions.assertThrows(MachineACafePreparationException.class, () -> machineACafe.commanderUnCafe(10, false));
 
         // THEN
-        assertEquals("Quantité de sucre trop importante max:5", machineACafeException.getMessage());
+        assertEquals("Quantité de sucre trop importante max:5", machineACafePreparationException.getMessage());
     }
 
     @Test
     @DisplayName("Impossible de commander un café quand plus de stock")
     @Order(6)
-    void commanderUnCafeQuandPlusDeStockBasic() {
+    void commanderUnCafeQuandPlusDeStock() {
         // GIVEN
 
         // WHEN
@@ -106,7 +103,7 @@ class MachineACafeBasicTest {
         });
 
         // THEN
-        assertEquals("Stock insuffisant", machineACafeStockException.getMessage());
+        assertEquals("Lors d'une commande a été détecté un stock insuffisant", machineACafeStockException.getMessage());
     }
 
 }
