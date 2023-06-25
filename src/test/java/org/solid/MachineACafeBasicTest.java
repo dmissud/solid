@@ -6,7 +6,7 @@ import org.solid.domain.machine.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Validation Machine à café Basic")
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class) // Uniquement pour lister les tests dans le bon ordre
 class MachineACafeBasicTest {
 
     private MachineACafe machineACafe;
@@ -15,9 +15,9 @@ class MachineACafeBasicTest {
 
     @BeforeEach
     void setUp() {
-        machineACafe = new MachineACafeBasic("Basic");
-        TypeCafe = MachineACafeBasic.CAFE_SIMPLE;
-        TypeCafeAuLait = MachineACafeBasic.CAFE_AU_LAIT;
+        machineACafe = new MachineACafe("Basic");
+        TypeCafe = "Café simple";
+        TypeCafeAuLait = "Café au lait";
     }
 
     @Test

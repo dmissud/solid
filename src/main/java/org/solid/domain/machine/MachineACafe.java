@@ -1,14 +1,18 @@
 package org.solid.domain.machine;
 
-public abstract class MachineACafe {
+public class MachineACafe {
+    public static final int NB_GRAINS_CAFE = 5;
+    public static final String CAFE_AU_LAIT = "Café au lait";
+    public static final String CAFE_SIMPLE = "Café simple";
     public static final int QUANTITE_SUCRE_MAXIMUM = 5;
     protected final String nom;
     protected final Stock stock;
 
-    protected MachineACafe(String nom, Stock stock) {
+    public MachineACafe(String nom) {
         this.nom = nom;
-        this.stock = stock;
+        this.stock = new Stock(100, 100, 50);
     }
+
 
     public String getNom() {
         return this.nom;
@@ -55,8 +59,21 @@ public abstract class MachineACafe {
         return new DescriptionMachines(this.machineDescription(), this.stockDescription());
     }
 
-    public abstract String machineDescription();
-    protected abstract Cafe produireLeCafe(int sucre, boolean avecLait);
-    protected abstract int nbGrainsDeCafePourProduireUnCafe();
+    public String machineDescription() {
+        return "MachineACafeBasic{" +
+                "nom='" + this.nom + '\'' +
+                '}';
+    }
+
+    protected Cafe produireLeCafe(int sucre, boolean avecLait) {
+        if (avecLait) {
+            return new Cafe(CAFE_AU_LAIT, sucre > 0, true);
+        }
+        return new Cafe(CAFE_SIMPLE, sucre > 0, false);
+    }
+
+    protected int nbGrainsDeCafePourProduireUnCafe() {
+        return NB_GRAINS_CAFE;
+    }
 
 }
