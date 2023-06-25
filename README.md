@@ -41,8 +41,16 @@ Différent cas d'extention de notre système :
 
 
 # Le principe de Ségrégation des Interfaces
+Voir Branche __ISP__
 
 Les clients d'une entité logicielle ne doivent pas avoir à dépendre d'un interface qu'ils n'utilisent pas.
 
 Le client ne doit pas accéder aux opération de maintenance des machines
 L'agent de maintenance doit maintenir les stocks et ne pas consommer de café
+
+Nous créons 2 interfaces :
+GererStock pour la gestion de stock
+MachineACafe pour la consommation de café
+Et nous renomons la class MachineACafe en MachineACafeImpl
+
+La classe Stock peut du coup aussi implémenter l'interface GererStock
