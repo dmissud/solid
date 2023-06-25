@@ -15,7 +15,7 @@ class MachineACafeBasicTest {
 
     @BeforeEach
     void setUp() {
-        machineACafe = new MachineACafe("Basic");
+        machineACafe = new MachineACafeImpl("Basic");
         TypeCafe = "Café simple";
         TypeCafeAuLait = "Café au lait";
     }

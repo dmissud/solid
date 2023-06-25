@@ -1,6 +1,6 @@
 package org.solid.domain.machine;
 
-public class Stock {
+public class Stock implements GererStock {
     private int nbGrainsCafe;
     private int nbSucre; // Sucre en grammes
     private int nbLait; // Lait en nombre de doses
@@ -11,20 +11,13 @@ public class Stock {
         this.nbLait = nbLait;
     }
 
-    void consommerStock(int nbGrainsCafe, int sucre, boolean avecLait) {
+    public void consommerStock(int nbGrainsCafe, int sucre, boolean avecLait) {
         this.nbGrainsCafe -= nbGrainsCafe;
         this.nbSucre -= sucre;
         this.nbLait -= avecLait ? 1 : 0;
     }
 
-    String description() {
-        return "Stock{" +
-                "nbGrainsCafe=" + this.nbGrainsCafe +
-                ", nbSucre=" + this.nbSucre +
-                ", nbLait=" + this.nbLait +
-                '}';
-    }
-    boolean verifieStock(int nbGrainsCafe, int sucre, boolean avecLait) {
+    public boolean verifieStock(int nbGrainsCafe, int sucre, boolean avecLait) {
         return verifieStockCafe(nbGrainsCafe)
                 && verifieStockSucre(sucre)
                 && (!avecLait || verifieStockLait());
@@ -42,18 +35,30 @@ public class Stock {
         return this.nbGrainsCafe >= nbGrainsCafe;
     }
 
-    EtatStock consulteEtatStock() {
+    public String getNom() {
+            return "Stock de cafe, sucre et lait";
+    }
+
+    public String stockDescription() {
+        return "Stock{" +
+                "nbGrainsCafe=" + this.nbGrainsCafe +
+                ", nbSucre=" + this.nbSucre +
+                ", nbLait=" + this.nbLait +
+                '}';
+    }
+
+    public EtatStock consulteEtatStock() {
         return new EtatStock(this.nbGrainsCafe, this.nbSucre, this.nbLait);
     }
 
-    void ajouterGrainsDeCafe(int nbGrainsDeCafe) {
+    public void ajouterGrainsDeCafe(int nbGrainsDeCafe) {
         this.nbGrainsCafe += nbGrainsDeCafe;
     }
-    void ajouterSucre(int nbSucre) {
+    public void ajouterSucre(int nbSucre) {
         this.nbSucre += nbSucre;
     }
 
-    void ajouterLait(int nbLait) {
+    public void ajouterLait(int nbLait) {
         this.nbLait += nbLait;
     }
 }

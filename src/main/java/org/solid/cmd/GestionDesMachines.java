@@ -1,6 +1,6 @@
 package org.solid.cmd;
 
-import org.solid.domain.machine.MachineACafe;
+import org.solid.domain.machine.MachineACafeImpl;
 import org.solid.domain.miseenoeuvre.ParcMachineACafe;
 import org.springframework.shell.standard.ShellCommandGroup;
 import org.springframework.shell.standard.ShellComponent;
@@ -20,13 +20,13 @@ public class GestionDesMachines {
 
     @ShellMethod(value = "Initialise le parc de machine.", key = "initMachine")
     public String initialisationDuParc() {
-        parcMachineACafe.addMachine(new MachineACafe("Basic1"));
+        parcMachineACafe.addMachine(new MachineACafeImpl("Basic1"));
         return buildMessage();
     }
 
     @ShellMethod(value = "Ajout d'une machine Basic au parc de machine.", key = "basic")
     public String nouvelleMachineBasic(String nomMachine) {
-        parcMachineACafe.addMachine(new MachineACafe(nomMachine));
+        parcMachineACafe.addMachine(new MachineACafeImpl(nomMachine));
         return buildMessage();
     }
 

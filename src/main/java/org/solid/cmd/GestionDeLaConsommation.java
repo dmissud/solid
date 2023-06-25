@@ -2,6 +2,7 @@ package org.solid.cmd;
 
 
 import org.solid.domain.machine.MachineACafe;
+import org.solid.domain.machine.GererStock;
 import org.solid.domain.miseenoeuvre.Clientele;
 import org.solid.domain.miseenoeuvre.Maintenance;
 import org.solid.domain.miseenoeuvre.ParcMachineACafe;
@@ -27,7 +28,7 @@ public class GestionDeLaConsommation {
 
     @ShellMethod(value = "Consommation d'un café.", key = "acheter")
     public String consommer(String nomClient, String nomMachine) {
-        Optional<MachineACafe> machineACafe = parcMachineACafe.trouveMachine(nomMachine);
+        Optional<MachineACafe> machineACafe = parcMachineACafe.trouveMachinePourConsomation(nomMachine);
         if (machineACafe.isEmpty()) {
             return AUCUNE_MACHINE_NE_CORRESPOND_A_CE_NOM;
         }
@@ -37,7 +38,7 @@ public class GestionDeLaConsommation {
 
     @ShellMethod(value = "Consommation d'un café par tous les clients", key = "tous")
     public String consommerTous(String nomMachine) {
-        Optional<MachineACafe> machineACafe = parcMachineACafe.trouveMachine(nomMachine);
+        Optional<MachineACafe> machineACafe = parcMachineACafe.trouveMachinePourConsomation(nomMachine);
         if (machineACafe.isEmpty()) {
             return AUCUNE_MACHINE_NE_CORRESPOND_A_CE_NOM;
         }
@@ -76,9 +77,9 @@ public class GestionDeLaConsommation {
         return execution.toString();
     }
 
-    @ShellMethod(value = "Maintenance d'une machine", key = "maintenance")
-    public void maintenance(String nomAgent, String nomMachine) {
-        Optional<MachineACafe> machineACafe = parcMachineACafe.trouveMachine(nomMachine);
-        machineACafe.ifPresent(machine -> maintenance.maintenance(nomAgent, machine));
+    private void maintenance(String nomAgent, String nomMachine) {
+        Optional<GererStock> machineACafeGererStock = parcMachineACafe.trouveMachinePourMaintenance(nomMachine);
+        machineACafeGererStock.ifPresent(machine -> maintenance.maintenance(nomAgent, machine));
     }
+
 }

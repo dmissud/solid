@@ -1,7 +1,7 @@
 package org.solid.domain.miseenoeuvre;
 
 
-import org.solid.domain.machine.MachineACafe;
+import org.solid.domain.machine.GererStock;
 import org.solid.domain.usage.AgentDeMaintenance;
 import org.springframework.stereotype.Component;
 
@@ -26,7 +26,7 @@ public class Maintenance {
         return lesAgents.keySet().stream().toList();
     }
 
-    public void maintenance(String nom, MachineACafe machineACafe) {
-        trouveAgent(nom).ifPresent(agentDeMaintenance -> agentDeMaintenance.ajusterLeStock(machineACafe));
+    public void maintenance(String nom, GererStock gererStock) {
+        trouveAgent(nom).ifPresent(agentDeMaintenance -> agentDeMaintenance.ajusterLeStock(gererStock));
     }
 }
